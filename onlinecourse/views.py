@@ -10,7 +10,7 @@ class CourseListView(generic.ListView):
 
 class CourseDetailsView(generic.DetailView):
     model = Course
-    template_name = 'onlinecourse/course_detail.html'
+    template_name = 'onlinecourse/course_details_bootstrap.html'
 
 def submit(request, course_id):
     course = get_object_or_404(Course, pk=course_id)

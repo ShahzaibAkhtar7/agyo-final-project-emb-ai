@@ -1,1 +1,29 @@
-<!DOCTYPE html><html><head><title>Exam Results</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"></head><body><div class="container mt-4"><h2>Exam Result for {{ course.name }}</h2><div class="alert alert-info">Your Grade: <b>{{ grade }}</b></div>{% for question in course.question_set.all %}<div class="card mb-3"><div class="card-header"><b>{{ question.content }}</b></div><div class="card-body">{% for choice in question.choice_set.all %}<p class="{% if choice.is_correct %}text-success font-weight-bold{% endif %}">- {{ choice.content }} {% if choice.is_correct %}(Correct Answer){% endif %}</p>{% endfor %}</div></div>{% endfor %}<a href="{% url 'onlinecourse:index' %}" class="btn btn-secondary">Back to Courses</a></div></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam Results</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-success font-weight-bold mb-3">Congratulations! You passed the exam.</h1>
+        <h2>Exam Result for {{ course.name }}</h2>
+        <div class="alert alert-info">Your Grade: <b>{{ grade }}</b></div>
+        
+        {% for question in course.question_set.all %}
+        <div class="card mb-3">
+            <div class="card-header"><b>{{ question.content }}</b></div>
+            <div class="card-body">
+                {% for choice in question.choice_set.all %}
+                <p class="{% if choice.is_correct %}text-success font-weight-bold{% endif %}">
+                    - {{ choice.content }} {% if choice.is_correct %}(Correct Answer){% endif %}
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        
+        <a href="{% url 'onlinecourse:index' %}" class="btn btn-secondary">Back to Courses</a>
+    </div>
+</body>
+</html>

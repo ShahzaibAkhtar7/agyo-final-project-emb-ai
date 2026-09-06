@@ -1,18 +1,18 @@
 from django.contrib import admin
-from .models import Course, Lesson, Question, Choice, Submission
+from .models import Course, Lesson, Instructor, Learner, Question, Choice, Submission
 
-class ChoiceInline(admin.TabularInline):
+class ChoiceInline(admin.StackedInline):
     model = Choice
-    extra = 4
+    extra = 3
 
-class QuestionInline(admin.TabularInline):
+class QuestionInline(admin.StackedInline):
     model = Question
     extra = 2
 
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [ChoiceInline]
 
-class LessonInline(admin.TabularInline):
+class LessonInline(admin.StackedInline):
     model = Lesson
     extra = 5
 
@@ -25,8 +25,11 @@ class CourseAdmin(admin.ModelAdmin):
 class LessonAdmin(admin.ModelAdmin):
     list_display = ['title']
 
+# Register all 7 models
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Lesson, LessonAdmin)
+admin.site.register(Instructor)
+admin.site.register(Learner)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Choice)
 admin.site.register(Submission)
